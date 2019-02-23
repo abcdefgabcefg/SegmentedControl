@@ -1,32 +1,51 @@
 const buttons = document.getElementsByTagName('button');
-const selectBox = document.getElementById('sel');
+const options = document.getElementsByClassName('option');
+let current = -1;
 
-window.matchMedia('(max-width: 600px)').addListener(changedSelected);
-
-for(let button of buttons){
-    button.onclick = makeActive;
-}
-
-function makeActive(){
-    for(let button of buttons){
-        button.classList.remove('active');
+document.addEventListener('click', function(even){
+    if(document.getElementById('select-box-wrapper').contains(even.target) 
+    && !document.getElementById('select-box-options').contains(even.target)){
+        document.getElementById('select-box-options').style.display = 'block';
     }
-    this.classList.add('active');
-}
+    else{
+        document.getElementById('select-box-options').style.display = 'none';
+    }
+})
 
-function changedSelected(mq){
-    if(mq.matches){
-        for(let i = 0; i < buttons.length; i++){
-            if(buttons[i].classList.contains('active')){
-                selectBox.selectedIndex = i;
-                break;
+window.matchMedia('(max-width:600px)').addListener(function(query){
+    if(query.matches){
+        if(current !== -1){
+            for(let option of options){
+                option.classList.remove('active');
             }
+            options[current].classList.add('active');
         }
     }
     else{
-        for(let button of buttons){
-            button.classList.remove('active');
+        if(current !== -1){
+            for(let button of buttons){
+                button.classList.remove('active');
+            }
+            buttons[current].classList.add('active');
         }
-        buttons[selectBox.selectedIndex].classList.add('active');         
     }
+})
+
+function makeBtnSelection(index){
+    for(let button of buttons){
+        button.classList.remove('active');
+    }
+    buttons[index].classList.add('active');
+    document.getElementById('select-box-text').innerHTML = buttons[index].innerHTML;
+    current = index;
+}
+
+function makeOptSelection(index){
+    for(let option of options){
+        option.classList.remove('active');
+    }
+    options[index].classList.add('active');
+    document.getElementById('select-box-text').innerHTML = options[index].innerHTML;
+    document.getElementById('select-box-options').style.display = 'none';
+    current = index;
 }

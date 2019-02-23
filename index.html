@@ -8,21 +8,22 @@
 <body>
     <section>
 <div class="wrapper_button">
-    <button>
-        sort by price</button><button>
-            sort by name</button><button>
+    <button onclick="makeBtnSelection(0)">
+        sort by price</button><button onclick="makeBtnSelection(1)">
+            sort by name</button><button onclick="makeBtnSelection(2)">
                 sort by relevance</button>
 </div>
-<select id="sel" class="wrapper_select hidden_el">
-        <option>sort by price</option>
-        <option>sort by name</option>
-        <option>sort by relevance</option>
-</select>
+<div class="select-box-wrapper" id="select-box-wrapper" >
+    <div class="select-box-text" id="select-box-text">Sort by price</div>
+    <div class="select-box-arrows-wrapper">&#9652;<br>&#9662;</div>
+    <div class="select-box-options clearfix" id="select-box-options">
+        <div class="option" onclick="makeOptSelection(0)">Sort by price</div>
+        <div class="option" onclick="makeOptSelection(1)">Sort by name</div>
+        <div class="option" onclick="makeOptSelection(2)">Sort by relevance</div>
+    </div>
+</div>
     </section>
-    <!--
-        Create a segmented control that turns into a <select> for mobile screens.
-        They should sync whenever any of them is changed.
-    -->
+    
     <script src="index.js"></script>
 </body>
 </html>
